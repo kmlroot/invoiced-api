@@ -1,10 +1,12 @@
 module V1
   class AccountsController < ApplicationController
     def create
-      @account = current_user.accounts.build(account_params)
+      binding.pry
+      account = current_user.accounts.build(account_params)
 
-      if @account.save
-        render :create, status: :created
+
+      if account.save
+        render :create, status: :created, locals: { account: account }
       else
         head(:unprocessable_entity)
       end

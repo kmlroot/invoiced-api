@@ -9,8 +9,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :accounts, only: %i[:create, :update]
-
+    resources :accounts, only: [:create, :update]
     resource :sessions, only: %i[:create, :destroy]
     resources :users, only: %i[:create]
   end
