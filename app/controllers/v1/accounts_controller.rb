@@ -1,9 +1,7 @@
 module V1
   class AccountsController < ApplicationController
     def create
-      binding.pry
       account = current_user.accounts.build(account_params)
-
 
       if account.save
         render :create, status: :created, locals: { account: account }
