@@ -5,6 +5,11 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  email: "user@example.com"
+  email: <%= Faker::Internet.email %>
   authentication_token: "fl12345678"
+  confirmed_at: <%= Time.now %>
+
+two:
+  email: <%= Faker::Internet.email %>
+  authentication_token: "fl1294004"
   confirmed_at: <%= Time.now %>

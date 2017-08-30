@@ -1,0 +1,10 @@
+bombilla_labs:
+  name: 'Bombilla Labs Inc.'
+  slug: 'bombilla-labs-inc'
+  owner: one
+
+another_one:
+  name: <%= Faker::Company.name %>
+  slug: 'another-one'
+  owner: two
+
