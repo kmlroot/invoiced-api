@@ -20,8 +20,20 @@ module V1
         default_currency: 'USD'
       }
 
-      post v1_accounts_path, headers: @header, params: { account: account_params }
+      post(
+        v1_accounts_path,
+        headers: @header,
+        params: { account: account_params }
+      )
+
+      account = JSON.parse(@response.body)['data']['account']
+
       assert_response :success
+      assert account['name'] == account_params[:name]
+      assert account['tax_payer_id'] == account_params[:tax_payer_id]
+      assert account['vat_rate'] == account_params[:vat_rate]
+      assert account['addreess'] == account_params[:addreess]
+      assert account['default_currency'] == account_params[:default_currency]
     end
   end
 end
