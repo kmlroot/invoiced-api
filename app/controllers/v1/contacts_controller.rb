@@ -1,5 +1,7 @@
 module V1
   class ContactsController < ApplicationController
+    include V1::Contacts::Response
+
     def index
       @contacts = current_account.contacts
 
@@ -7,33 +9,18 @@ module V1
     end
 
     def create
-      @contact = current_organization.contacts.build(contact_params)
-
-      if @contact.save
-        render :create, status: :created
-      else
-        head(:unprocessable_entity)
-      end
+      contact = current_organization.contacts.build(contact_params)
+      create_and_render_contact(contact) || render_invalid_response
     end
 
     def update
-      @contact = current_organization.contacts.find(params[:id])
-
-      if @contact.update
-        render :update
-      else
-        head(:unprocessable_entity)
-      end
+      contact = current_organization.contacts.find(params[:id])
+      update_and_render_contact(contact, contact_params) || render_invalid_response
     end
 
     def destroy
-      @contact = current_organization.contacts.find(id: params[:id])
-
-      if @contact.destroy
-        head(:ok)
-      else
-        head(:unprocessable_entity)
-      end
+      contact = current_organization.contacts.find(id: params[:id])
+      destroy_and_render_contact(contact) || render_invalid_response
     end
 
     private
